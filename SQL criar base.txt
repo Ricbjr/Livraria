@@ -1,0 +1,37 @@
+CREATE DATABASE `livraria` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE TABLE `autor` (
+  `Handle` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`Handle`),
+  UNIQUE KEY `Nome_UNIQUE` (`Nome`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+CREATE TABLE `edicao` (
+  `Handle` int(11) NOT NULL AUTO_INCREMENT,
+  `Numero` double NOT NULL,
+  `AnoPublicacao` datetime DEFAULT NULL,
+  `Isbn` int(11) DEFAULT NULL,
+  `Editora` varchar(200) DEFAULT NULL,
+  `HandleLivro` int(11) NOT NULL,
+  PRIMARY KEY (`Handle`),
+  UNIQUE KEY `Isbn_UNIQUE` (`Isbn`),
+  KEY `fk_edicao_livro_idx` (`HandleLivro`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE `livro` (
+  `Handle` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(100) NOT NULL,
+  `Descricao` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`Handle`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `livro_autor` (
+  `Handle` int(11) NOT NULL AUTO_INCREMENT,
+  `HandleLivro` int(11) NOT NULL,
+  `HandleAutor` int(11) NOT NULL,
+  PRIMARY KEY (`Handle`,`HandleLivro`,`HandleAutor`),
+  KEY `fk_livro_autor_idx` (`HandleLivro`),
+  KEY `fk_autor_livro_idx` (`HandleAutor`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+MySQL
+Nome do usuário da base: root
+Senha de conexão do banco: 12345
